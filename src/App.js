@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import Index from './components/Index.jsx';
 import Entries from './components/Entries.jsx';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link
+// } from 'react-router-dom';
 
 
 class App extends Component {
@@ -37,12 +37,16 @@ class App extends Component {
     this.handleTimeInputChange = this.handleTimeInputChange.bind(this);
   }
   componentDidMount () {
-    fetch('https://intelligent-croissant-85314.herokuapp.com/entries')
-      .then(res => res.json()).then((jsonRes) => {
+    fetch('https://intelligent-croissant-85314.herokuapp.com/entries', {
+      method: 'GET',
+    }).then(res => res.json()).then((jsonRes) => {
+        console.log('trying to set state')
         this.setState({
           apiData: jsonRes.entries_data,
           apiDataLoaded: true,
         });
+        console.log(this.state.apiData)
+        console.log(this.state)
       }).catch(err => console.log(err));
   }
 
@@ -189,14 +193,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-       
+       <Entries apiData={this.state.apiData} />
        {/*ROUTES  */}
-        <Router>
+        {/* <Router>
           <Route path='/' component={Index}/>
-        </Router>
-        <Router>
-          <Route path='/entries' component={Entries}/>
-        </Router>
+        </Router> */}
+        {/* <Router>
+          <Route path='/entries' render={props => (
+            <Entries apiData={this.state.apiData} />
+            )} />
+        </Router> */}
       </div>
     );
   }
