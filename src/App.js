@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
   import './App.css';
+  import Nav from './components/Nav.jsx';
+  import Footer from './components/Footer.jsx';
   import Index from './components/Index.jsx';
   import Entries from './components/Entries.jsx';
   import {
@@ -24,7 +26,7 @@ import React, { Component } from 'react';
         dateValue: '',
         timeValue: '',
       };
-    }
+    
 
     
     /* CRUD functionality */
@@ -37,7 +39,7 @@ import React, { Component } from 'react';
     this.handleAuthorInputChange = this.handleAuthorInputChange.bind(this);
     this.handleDateInputChange = this.handleDateInputChange.bind(this);
     this.handleTimeInputChange = this.handleTimeInputChange.bind(this);
-  
+  }
       componentDidMount () {
       fetch('https://intelligent-croissant-85314.herokuapp.com/entries', {
         method: 'GET',
@@ -164,11 +166,17 @@ import React, { Component } from 'react';
   }
     render() {
       return (
-        <div className="App">
         <Router>
-          <Route path='/entries' render={()=><Entries apiData={this.state.apiData}/>} />
+          <div className="App">
+            <Nav />
+            <switch>
+              <Route exact path='/' render={()=><Index />} />
+              <Route path='/entries' render={()=><Entries apiData={this.state.apiData}/>} />
+            </switch>
+            <Footer />
+          </div>
         </Router>
-        </div>
+        
       );
     }
   }

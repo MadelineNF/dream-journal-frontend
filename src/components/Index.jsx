@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import Nav from './Nav.jsx';
-import Footer from './Footer.jsx';
 
 class Index extends Component {
   render() {
     return (
       <div>
-        <Nav/>
         <div className="landing">
           <h1>Dream Journal</h1>
           <h3>&nbsp;Dream Journal is a react-rails project made by Madeline Nelson-Folkersen. This is a place to record your dreams in an easy to use and anonymous format.</h3>
