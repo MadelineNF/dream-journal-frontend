@@ -1,42 +1,6 @@
 import React, { Component } from 'react';
 
 class Entry extends Component {
-  constructor() {
-      super();
-      this.state = {
-        apiData: null,
-        apiDataLoaded: false,
-        currentlyEditing: null,
-        currentlyAdding: false,
-        /* inputs */
-        contentValue: '',
-        authorValue: '',
-        categoryValue: '',
-        dateValue: '',
-        timeValue: '',
-
-      };
-    }
-    componentDidMount () {
-      fetch('https://intelligent-croissant-85314.herokuapp.com/entries', {
-        method: 'GET',
-      }).then(res => res.json()).then((jsonRes) => {
-          console.log('trying to set state')
-          this.setState({
-            apiData: jsonRes.entries_data,
-            apiDataLoaded: true,
-            currentlyEditing: id,
-            contentValue: jsonRes.entries_data.content,
-            authorValue: jsonRes.entries_data.author,
-            categoryValue: jsonRes.entries_data.category,
-            dateValue: jsonRes.entries_data.date,
-            timeValue: jsonRes.entries_data.time,
-            currentlyAdding: false,
-          });
-          console.log(this.state.apiData)
-          console.log(this.state)
-        }).catch(err => console.log(err));
-    }
   render() {
     return (
       <div>

@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import './App.css';
-import Index from './components/Index.jsx';
-import Entries from './components/Entries.jsx';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link
-// } from 'react-router-dom';
+  import './App.css';
+  import Index from './components/Index.jsx';
+  import Entries from './components/Entries.jsx';
+  import {
+    BrowserRouter as Router,
+    Route,
+    Link
+  } from 'react-router-dom';
 
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      apiData: null,
-      apiDataLoaded: false,
-      currentlyEditing: null,
-      currentlyAdding: false,
-      /* inputs */
-      contentValue: '',
-      authorValue: '',
-      categoryValue: '',
-      dateValue: '',
-      timeValue: '',
-    };
+  class App extends Component {
+    constructor() {
+      super();
+      this.state = {
+        apiData: null,
+        apiDataLoaded: false,
+        currentlyEditing: null,
+        currentlyAdding: false,
+        /* inputs */
+        contentValue: '',
+        authorValue: '',
+        categoryValue: '',
+        dateValue: '',
+        timeValue: '',
+      };
+    }
 
-     /* CRUD functionality */
+    
+    /* CRUD functionality */
     this.addEntry = this.addEntry.bind(this);
     this.editEntry = this.editEntry.bind(this);
     this.deleteEntry = this.deleteEntry.bind(this);
@@ -35,20 +37,17 @@ class App extends Component {
     this.handleAuthorInputChange = this.handleAuthorInputChange.bind(this);
     this.handleDateInputChange = this.handleDateInputChange.bind(this);
     this.handleTimeInputChange = this.handleTimeInputChange.bind(this);
-  }
-  componentDidMount () {
-    fetch('https://intelligent-croissant-85314.herokuapp.com/entries', {
-      method: 'GET',
-    }).then(res => res.json()).then((jsonRes) => {
-        console.log('trying to set state')
-        this.setState({
-          apiData: jsonRes.entries_data,
-          apiDataLoaded: true,
-        });
-        console.log(this.state.apiData)
-        console.log(this.state)
-      }).catch(err => console.log(err));
-  }
+  
+      componentDidMount () {
+      fetch('https://intelligent-croissant-85314.herokuapp.com/entries', {
+        method: 'GET',
+      }).then(res => res.json()).then((jsonRes) => {
+          this.setState({
+            apiData: jsonRes.entries_data,
+            apiDataLoaded: true,
+          });
+        }).catch(err => console.log(err));
+    }
 
 /* shows/hides edit form for individual quote */
   showEditForm(id) {
@@ -163,49 +162,16 @@ class App extends Component {
   handleTimeInputChange(event) {
     this.setState({ timeValue: event.target.value });
   }
-
-    /* ======== RENDER DECIDER */
-  // renderEntryList() {
-  //   if (this.state.apiDataLoaded) {
-  //     return (
-  //       <EntryList
-  //         apiData={this.state.apiData}
-  //         deleteEntry={this.deleteEntry}
-  //         currentlyEditing={this.state.currentlyEditing}
-  //         editEntry={this.editEntry}
-  //         handleAuthorInputChange={this.handleAuthorInputChange}
-  //         handleCategoryInputChange={this.handleCategoryInputChange}
-  //         handleContentInputChange={this.handleContentInputChange}
-  //         handleDateInputChange={this.handleDateInputChange}
-  //         handleTimeInputChange={this.handleTimeInputChange}
-  //         authorValue={this.state.authorValue}
-  //         contentValue={this.state.contentValue}
-  //         categoryValue={this.state.categoryValue}
-  //         dateValue={this.state.dateValue}
-  //         timeValue={this.state.timeValue}
-  //       />
-  //     );
-  //   }
-  //   return <p>Loading</p>;
-  // }
-
-
-  render() {
-    return (
-      <div className="App">
-       <Entries apiData={this.state.apiData} />
-       {/*ROUTES  */}
-        {/* <Router>
-          <Route path='/' component={Index}/>
-        </Router> */}
-        {/* <Router>
-          <Route path='/entries' render={props => (
-            <Entries apiData={this.state.apiData} />
-            )} />
-        </Router> */}
-      </div>
-    );
+    render() {
+      return (
+        <div className="App">
+        <Router>
+          <Route path='/entries' render={()=><Entries apiData={this.state.apiData}/>} />
+        </Router>
+        </div>
+      );
+    }
   }
-}
 
-export default App;
+
+  export default App;
