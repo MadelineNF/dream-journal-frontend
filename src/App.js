@@ -4,10 +4,10 @@ import React, { Component } from 'react';
   import Footer from './components/Footer.jsx';
   import Index from './components/Index.jsx';
   import Entries from './components/Entries.jsx';
+  import EntrySingle from './components/EntrySingle.jsx';
   import {
     BrowserRouter as Router,
     Route,
-    Link
   } from 'react-router-dom';
 
 
@@ -172,6 +172,7 @@ import React, { Component } from 'react';
             <switch>
               <Route exact path='/' render={()=><Index />} />
               <Route path='/entries' render={()=><Entries apiData={this.state.apiData}/>} />
+              <Route path='/entry/:id' Component={EntrySingle} />
             </switch>
             <Footer />
           </div>

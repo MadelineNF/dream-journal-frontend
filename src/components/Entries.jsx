@@ -5,8 +5,6 @@ import EntryList from './EntryList.jsx'
 class Entries extends Component {
   constructor(props) {
       super(props);
-
-      console.log('Entries props', this.props)
       this.state = {
         apiData: this.props.apiData,
         apiDataLoaded: false,
